@@ -4,15 +4,19 @@ import { HashRouter } from 'react-router-dom';
 import { IconStyle } from './assets/iconfont/iconfont';
 import { GlobalStyle } from './style';
 import routes from './routes/index.js';
+import { Provider } from 'react-redux'
+import store from './store'
 
 function App () {
   return (
-    <HashRouter>
-      <GlobalStyle></GlobalStyle>
-      <IconStyle></IconStyle>
-      <i className="iconfont">&#xe62b;</i>
-      {renderRoutes(routes)}
-    </HashRouter>
+    <Provider store={store}>
+      <HashRouter>
+        <GlobalStyle></GlobalStyle>
+        <IconStyle></IconStyle>
+        {/* <i className="iconfont">&#xe62b;</i> */}
+        {renderRoutes(routes)}
+      </HashRouter>
+    </Provider>
   );
 }
 
