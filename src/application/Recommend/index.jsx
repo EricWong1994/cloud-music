@@ -11,10 +11,10 @@ import { Content } from './style';
 
 function Recommend(props) {
 	const { bannerList, recommendList } = props;
-
 	const { getBannerDataDispatch, getRecommendListDataDispatch } = props;
 
 	useEffect(() => {
+		console.log('getBannerDataDispatch');
 		getBannerDataDispatch();
 		getRecommendListDataDispatch();
 		//eslint-disable-next-line
@@ -25,12 +25,7 @@ function Recommend(props) {
 
 	return (
 		<Content>
-			<Scroll
-				className='list'
-				bounceTop={true}
-				bounceBottom={true}
-				// pullUp={() => console.log('pullUp')}
-			>
+			<Scroll className='list' bounceTop={true} bounceBottom={true}>
 				<div>
 					<Slider bannerList={bannerListJS} />
 					<RecommendList recommendList={recommendListJS} />
