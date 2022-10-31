@@ -2,8 +2,9 @@
  * http://localhost:3000/#/recommend
  */
 import React, { useEffect } from 'react';
-import Slider from '../../components/slider/';
 import { connect } from 'react-redux';
+import { forceCheck } from 'react-lazyload';
+import Slider from '../../components/slider/';
 import * as actionTypes from './store/actionCreators';
 import RecommendList from '../../components/list/';
 import Scroll from '../../baseUI/scroll/index';
@@ -25,7 +26,7 @@ function Recommend(props) {
 
 	return (
 		<Content>
-			<Scroll className='list' bounceTop={true} bounceBottom={true}>
+			<Scroll className='list' onScroll={forceCheck}>
 				<div>
 					<Slider bannerList={bannerListJS} />
 					<RecommendList recommendList={recommendListJS} />
