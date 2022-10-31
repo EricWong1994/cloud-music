@@ -12,10 +12,10 @@ function Slider(props) {
 		if (bannerList.length && !sliderSwiper) {
 			let newSliderSwiper = new Swiper('.slider-container', {
 				loop: true,
-				autoplay: {
-					delay: 3000,
-					disableOnInteraction: false,
-				},
+				// autoplay: {
+				// 	delay: 3000,
+				// 	disableOnInteraction: false,
+				// },
 				pagination: { el: '.swiper-pagination' },
 			});
 			setSliderSwiper(newSliderSwiper);

@@ -4,6 +4,8 @@
 import React from 'react';
 import Slider from '../../components/slider';
 import RecommendList from '../../components/list';
+import { Content } from './style';
+import Scroll from '../../baseUI/scroll';
 
 function Recommend() {
 	//mock 数据
@@ -24,10 +26,19 @@ function Recommend() {
 	});
 
 	return (
-		<div>
-			<Slider bannerList={bannerList}></Slider>
-			<RecommendList recommendList={recommendList}></RecommendList>
-		</div>
+		<Content>
+			<Scroll
+				className='list'
+				bounceTop={true}
+				bounceBottom={true}
+				// pullUp={() => console.log('pullUp')}
+			>
+				<div>
+					<Slider bannerList={bannerList} />
+					<RecommendList recommendList={recommendList} />
+				</div>
+			</Scroll>
+		</Content>
 	);
 }
 
