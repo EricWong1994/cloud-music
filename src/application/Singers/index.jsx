@@ -36,24 +36,26 @@ function Singers(props) {
 		pullDownRefreshDispatch,
 		pullUpRefreshDispatch,
 	} = props;
-	let [category, setCategory] = useState('');
-	let [alpha, setAlpha] = useState('');
+	// 当前分类（-1为热门）
+	let [category, setCategory] = useState('-1');
+	// 当前首字母(-1为全部)
+	let [alpha, setAlpha] = useState('-1');
 
 	useEffect(() => {
 		getHotSingerDispatch();
 		// eslint-disable-next-line
 	}, []);
 
-	let handleUpdateAlpha = val => {
-		setAlpha(val);
-		// TODO
-		updateDispatch(category, val);
-	};
-
+	// 点击分类
 	let handleUpdateCatetory = val => {
 		setCategory(val);
-		// TODO
-		updateDispatch(val, category);
+		updateDispatch(val, alpha);
+	};
+
+	// 点击首字母
+	let handleUpdateAlpha = val => {
+		setAlpha(val);
+		updateDispatch(category, val);
 	};
 
 	// 渲染函数，返回歌手列表
@@ -114,6 +116,7 @@ function Singers(props) {
 					{renderSingerList()}
 				</Scroll>
 				{enterLoading ? <Loading></Loading> : null}
+				{/* TODO */}
 				{/* <Loading show={enterLoading}></Loading> */}
 			</ListContainer>
 		</div>

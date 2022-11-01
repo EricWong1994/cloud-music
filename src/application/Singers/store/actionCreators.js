@@ -1,6 +1,7 @@
 import {
   getHotSingerListRequest,
-  getSingerListRequest
+  getSingerListRequest,
+  categoryMap
 } from "../../../api/request";
 import {
   CHANGE_SINGER_LIST,
@@ -86,7 +87,8 @@ export const refreshMoreHotSingerList = () => {
 //第一次加载对应类别的歌手
 export const getSingerList = (category, alpha) => {
   return (dispatch, getState) => {
-    getSingerListRequest(category, alpha, 0).then(res => {
+    const { type, area } = !!category ? categoryMap.get(category) : {};
+    getSingerListRequest(type, area, alpha, 0).then(res => {
       const data = res.artists;
       dispatch(changeSingerList(data));
       dispatch(changeEnterLoading(false));
@@ -102,7 +104,8 @@ export const refreshMoreSingerList = (category, alpha) => {
   return (dispatch, getState) => {
     const pageCount = getState().getIn(['singers', 'pageCount']);
     const singerList = getState().getIn(['singers', 'singerList']).toJS();
-    getSingerListRequest(category, alpha, pageCount).then(res => {
+    const { type, area } = !!category ? categoryMap.get(category) : {};
+    getSingerListRequest(type, area, alpha, pageCount).then(res => {
       const data = [...singerList, ...res.artists];
       dispatch(changeSingerList(data));
       dispatch(changePullUpLoading(false));
