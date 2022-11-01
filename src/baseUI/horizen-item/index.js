@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, memo } from 'react';
+import React, { useRef, useEffect, memo } from 'react';
 import styled from 'styled-components';
 import Scroll from '../scroll/index'
 import { PropTypes } from 'prop-types';
@@ -20,6 +20,7 @@ const List = styled.div`
     vertical-align: middle;
   }
 `
+
 const ListItem = styled.span`
   flex: 0 0 auto;
   font-size: ${style["font-size-m"]};
@@ -34,10 +35,21 @@ const ListItem = styled.span`
 function Horizen (props) {
   const { list, oldVal, title } = props;
   const { handleClick } = props;
+  const Category = useRef(null);
+  // 初始化内容宽度
+  useEffect(() => {
+    let categoryDOM = Category.current;
+    let tagElems = categoryDOM.querySelectorAll("span");
+    let totalWidth = 0;
+    Array.from(tagElems).forEach(ele => {
+      totalWidth += ele.offsetWidth;
+    });
+    categoryDOM.style.width = `${totalWidth}px`;
+  }, []);
 
   return (
     <Scroll direction={"horizental"}>
-      <div>
+      <div ref={Category}>
         <List>
           <span>{title}</span>
           {
