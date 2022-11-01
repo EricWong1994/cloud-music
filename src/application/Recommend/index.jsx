@@ -54,6 +54,7 @@ const mapStateToProps = state => ({
 	recommendList: state.getIn(['recommend', 'recommendList']),
 	enterLoading: state.getIn(['recommend', 'enterLoading']),
 });
+
 // 映射 dispatch 到 props 上
 const mapDispatchToProps = dispatch => {
 	return {
