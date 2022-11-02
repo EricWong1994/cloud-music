@@ -32,3 +32,7 @@ export const getSingerListRequest = (type, area, alpha, offset) => {
     }&initial=${typeof alpha === 'string' ? alpha.toLowerCase() : alpha}&offset=${offset}`
   );
 }
+
+export const getRankListRequest = () => {
+  return axiosInstance.get(`/toplist/detail`);
+};
