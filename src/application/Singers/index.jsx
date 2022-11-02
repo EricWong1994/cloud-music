@@ -20,6 +20,7 @@ import {
 } from './store/actionCreators';
 import { connect } from 'react-redux';
 import Loading from '../../baseUI/loading';
+import LazyLoad, { forceCheck } from 'react-lazyload';
 
 function Singers(props) {
 	const {
@@ -37,9 +38,9 @@ function Singers(props) {
 		pullUpRefreshDispatch,
 	} = props;
 	// 当前分类（-1为热门）
-	let [category, setCategory] = useState('-1');
+	let [category, setCategory] = useState('');
 	// 当前首字母(-1为全部)
-	let [alpha, setAlpha] = useState('-1');
+	let [alpha, setAlpha] = useState('');
 
 	useEffect(() => {
 		getHotSingerDispatch();
@@ -67,12 +68,23 @@ function Singers(props) {
 					return (
 						<ListItem key={item.accountId + '' + index}>
 							<div className='img_wrapper'>
-								<img
-									src={`${item.picUrl}?param=300x300`}
-									width='100%'
-									height='100%'
-									alt='music'
-								/>
+								<LazyLoad
+									placeholder={
+										<img
+											width='100%'
+											height='100%'
+											src={require('./singer.png')}
+											alt='music'
+										/>
+									}
+								>
+									<img
+										src={`${item.picUrl}?param=300x300`}
+										width='100%'
+										height='100%'
+										alt='music'
+									/>
+								</LazyLoad>
 							</div>
 							<span className='name'>{item.name}</span>
 						</ListItem>
@@ -112,6 +124,7 @@ function Singers(props) {
 					pullDown={handlePullDown}
 					pullUpLoading={pullUpLoading}
 					pullDownLoading={pullDownLoading}
+					onScroll={forceCheck}
 				>
 					{renderSingerList()}
 				</Scroll>
