@@ -6,6 +6,7 @@ import { GlobalStyle } from './style';
 import routes from './routes/index.js';
 import { Provider } from 'react-redux';
 import store from './store';
+import { Data } from './application/Singers/data';
 
 function App() {
 	return (
@@ -14,7 +15,7 @@ function App() {
 				<GlobalStyle></GlobalStyle>
 				<IconStyle></IconStyle>
 				{/* <i className="iconfont">&#xe62b;</i> */}
-				{renderRoutes(routes)}
+				<Data>{renderRoutes(routes)}</Data>
 			</HashRouter>
 		</Provider>
 	);

@@ -18,6 +18,8 @@ export const getHotSingerListRequest = (count, limit = 50) => {
 //   return axiosInstance.get(`/artist/list?cat=${category}&initial=${alpha.toLowerCase()}&offset=${count}`);
 // }
 
+// type - 1:全部 1:男歌手 2:女歌手 3: 乐队
+// area - 1:全部 7华语 96欧美 8:日本 16韩国 0: 其他
 export const categoryMap = new Map([
   // ['-1', { type: -1, area: -1 }],
   ['1001', { type: 1, area: 7 }],
