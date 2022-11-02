@@ -18,27 +18,6 @@ export const getHotSingerListRequest = (count, limit = 50) => {
 //   return axiosInstance.get(`/artist/list?cat=${category}&initial=${alpha.toLowerCase()}&offset=${count}`);
 // }
 
-// type - 1:全部 1:男歌手 2:女歌手 3: 乐队
-// area - 1:全部 7华语 96欧美 8:日本 16韩国 0: 其他
-export const categoryMap = new Map([
-  // ['-1', { type: -1, area: -1 }],
-  ['1001', { type: 1, area: 7 }],
-  ['1002', { type: 2, area: 7 }],
-  ['1003', { type: 3, area: 7 }],
-  ['2001', { type: 1, area: 96 }],
-  ['2002', { type: 2, area: 96 }],
-  ['2003', { type: 3, area: 96 }],
-  ['6001', { type: 1, area: 8 }],
-  ['6002', { type: 2, area: 8 }],
-  ['6003', { type: 3, area: 8 }],
-  ['7001', { type: 1, area: 16 }],
-  ['7002', { type: 2, area: 16 }],
-  ['7003', { type: 3, area: 16 }],
-  ['4001', { type: 1, area: 0 }],
-  ['4002', { type: 2, area: 0 }],
-  ['4003', { type: 3, area: 0 }],
-]);
-
 /**
  * 歌手分类列表 https://neteasecloudmusicapi.vercel.app/#/?id=%e6%ad%8c%e6%89%8b%e5%88%86%e7%b1%bb%e5%88%97%e8%a1%a8
  * @param {*} type -1:全部 1:男歌手 2:女歌手 3:乐队

@@ -1,7 +1,6 @@
 import {
   getHotSingerListRequest,
-  getSingerListRequest,
-  categoryMap
+  getSingerListRequest
 } from "../../../api/request";
 import {
   CHANGE_SINGER_LIST,
@@ -15,7 +14,7 @@ import {
 import {
   fromJS
 } from 'immutable';
-
+import { categoryMap } from '../../../api/config'
 // TODO
 export const changeCategory = (data) => ({
   type: CHANGE_CATOGORY,
