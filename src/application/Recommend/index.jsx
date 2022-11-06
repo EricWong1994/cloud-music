@@ -6,10 +6,11 @@ import { connect } from 'react-redux';
 import { forceCheck } from 'react-lazyload';
 import Slider from '../../components/slider/';
 import * as actionTypes from './store/actionCreators';
-import RecommendList from '../../components/list/';
+import RecommendList from '../../components/list';
 import Scroll from '../../baseUI/scroll/index';
 import { Content } from './style';
 import Loading from '../../baseUI/loading/index';
+import { renderRoutes } from 'react-router-config';
 
 function Recommend(props) {
 	const { bannerList, recommendList } = props;
@@ -42,6 +43,7 @@ function Recommend(props) {
 				</div>
 			</Scroll>
 			{enterLoading ? <Loading></Loading> : null}
+			{renderRoutes(props.route.routes)}
 		</Content>
 	);
 }
