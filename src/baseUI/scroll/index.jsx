@@ -9,8 +9,8 @@ import React, {
 import PropTypes from 'prop-types';
 import BScroll from 'better-scroll';
 import styled from 'styled-components';
-import Loading from '../loading/index';
-import LoadingV2 from '../loading-v2/index';
+import Loading from '../loading';
+import LoadingV2 from '../loading-v2';
 import { debounce } from '../../api/utils';
 
 const ScrollContainer = styled.div`
@@ -42,16 +42,17 @@ export const PullDownLoading = styled.div`
 
 const Scroll = forwardRef((props, ref) => {
 	const [bScroll, setBScroll] = useState();
+
 	const scrollContaninerRef = useRef();
+
 	const { direction, click, refresh, bounceTop, bounceBottom } = props;
+
 	const { pullUp, pullDown, onScroll, pullUpLoading, pullDownLoading } =
 		props;
 
 	let pullUpDebounce = useMemo(() => {
 		return debounce(pullUp, 300);
 	}, [pullUp]);
-	// 千万注意，这里不能省略依赖，
-	// 不然拿到的始终是第一次 pullUp 函数的引用，相应的闭包作用域变量都是第一次的，产生闭包陷阱。下同。
 
 	let pullDownDebounce = useMemo(() => {
 		return debounce(pullDown, 300);
@@ -61,7 +62,6 @@ const Scroll = forwardRef((props, ref) => {
 		const scroll = new BScroll(scrollContaninerRef.current, {
 			scrollX: direction === 'horizental',
 			scrollY: direction === 'vertical',
-			// TODO probeType
 			probeType: 3,
 			click: click,
 			bounce: {
@@ -73,7 +73,7 @@ const Scroll = forwardRef((props, ref) => {
 		return () => {
 			setBScroll(null);
 		};
-		//eslint-disable-next-line
+		// eslint-disable-next-line
 	}, []);
 
 	useEffect(() => {
@@ -85,6 +85,32 @@ const Scroll = forwardRef((props, ref) => {
 			bScroll.off('scroll');
 		};
 	}, [onScroll, bScroll]);
+
+	useEffect(() => {
+		if (!bScroll || !pullUp) return;
+		bScroll.on('scrollEnd', () => {
+			//判断是否滑动到了底部
+			if (bScroll.y <= bScroll.maxScrollY + 100) {
+				pullUpDebounce();
+			}
+		});
+		return () => {
+			bScroll.off('scrollEnd');
+		};
+	}, [pullUpDebounce, pullUp, bScroll]);
+
+	useEffect(() => {
+		if (!bScroll || !pullDown) return;
+		bScroll.on('touchEnd', pos => {
+			//判断用户的下拉动作
+			if (pos.y > 50) {
+				pullDownDebounce();
+			}
+		});
+		return () => {
+			bScroll.off('touchEnd');
+		};
+	}, [pullDownDebounce, pullDown, bScroll]);
 
 	useEffect(() => {
 		if (refresh && bScroll) {
@@ -143,7 +169,6 @@ const Scroll = forwardRef((props, ref) => {
 	const PullDowndisplayStyle = pullDownLoading
 		? { display: '' }
 		: { display: 'none' };
-
 	return (
 		<ScrollContainer ref={scrollContaninerRef}>
 			{props.children}
@@ -180,8 +205,8 @@ Scroll.propTypes = {
 	pullDown: PropTypes.func,
 	pullUpLoading: PropTypes.bool,
 	pullDownLoading: PropTypes.bool,
-	bounceTop: PropTypes.bool, // 当滚动超过边缘的时候会有一小段回弹动画
-	bounceBottom: PropTypes.bool, // 是否支持向上吸顶
+	bounceTop: PropTypes.bool, //是否支持向上吸顶
+	bounceBottom: PropTypes.bool, //是否支持向上吸顶
 };
 
 export default Scroll;

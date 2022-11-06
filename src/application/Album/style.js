@@ -169,12 +169,12 @@ export const Menu = styled.div`
   }
 `;
 
-
-//style.js 中加入
 export const SongList = styled.div`
   border-radius: 10px;
   opacity: 0.98;
   ${props => props.showBackground ? `background: ${style["highlight-background-color"]}` : ""}
+  /* background: ${style["highlight-background-color"]}; */
+
   .first_line {
     box-sizing: border-box;
     padding: 10px 0;
@@ -203,7 +203,7 @@ export const SongList = styled.div`
       display: flex;
       align-items: center;
       position: absolute;
-      right: 0; top :0; bottom: 0;
+      right: 0; top: 0; bottom: 0;
       width: 130px;
       line-height: 34px;
       background: ${style["theme-color"]};

@@ -8,6 +8,8 @@ export const SliderContainer = styled.div`
   height: 100%;
   margin: auto;
   background: white;
+  /* overflow: hidden; */
+
   .before {
     position: absolute;
     top: -300px;
