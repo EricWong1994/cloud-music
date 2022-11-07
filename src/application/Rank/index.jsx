@@ -26,6 +26,10 @@ function Rank(props) {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
+	const enterDetail = detail => {
+		props.history.push(`/rank/${detail.id}`);
+	};
+
 	// 这是渲染榜单列表函数，传入 global 变量来区分不同的布局方式
 	const renderRankList = (list, global) => {
 		return (
@@ -37,6 +41,7 @@ function Rank(props) {
 							tracks={item.tracks}
 							key={`${item.coverImgId}${index}`}
 							// onClick={() => enterDetail(item.name)}
+							onClick={() => enterDetail(item)}
 						>
 							<div className='img_wrapper'>
 								<img src={item.coverImgUrl} alt='' />

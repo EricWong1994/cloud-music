@@ -34,7 +34,14 @@ const route = [
       },
       {
         path: "/rank",
-        component: Rank
+        component: Rank,
+        key: "rank",
+        routes: [
+          {
+            path: "/rank/:id",
+            component: Album
+          }
+        ]
       }
     ]
   },
