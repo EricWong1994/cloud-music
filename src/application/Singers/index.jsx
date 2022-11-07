@@ -66,6 +66,10 @@ function Singers(props) {
 		updateDispatch(category, val);
 	};
 
+	const enterDetail = id => {
+		props.history.push(`/singers/${id}`);
+	};
+
 	// 渲染函数，返回歌手列表
 	const renderSingerList = () => {
 		const list = singerList ? singerList.toJS() : [];
@@ -73,7 +77,10 @@ function Singers(props) {
 			<List>
 				{list.map((item, index) => {
 					return (
-						<ListItem key={item.accountId + '' + index}>
+						<ListItem
+							key={item.accountId + '' + index}
+							onClick={() => enterDetail(item.id)}
+						>
 							<div className='img_wrapper'>
 								<LazyLoad
 									placeholder={
